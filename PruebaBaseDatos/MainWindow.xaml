@@ -62,6 +62,50 @@
                     </StackPanel>
                 </StackPanel>
             </TabItem>
+            <TabItem Header="DataGrid">
+                <DockPanel>
+                    <Button x:Name="ActualizarButton" DockPanel.Dock="Bottom" HorizontalAlignment="Left" Click="ActualizarButton_Click">Actualizar</Button>
+                    <DataGrid x:Name="DatosDataGrid" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Identificador" Binding="{Binding id}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Nombre" Binding="{Binding nombre}" Width="*"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Apellido" Binding="{Binding apellido}" Width="*"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="Filtrar">
+
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock>Nombre:</TextBlock>
+                        <TextBox Width="100" x:Name="FiltrarTextBox"></TextBox>
+                        <Button x:Name="FiltrarButton" Click="FiltrarButton_Click">Filtrar</Button>
+                    </StackPanel>
+                    <DataGrid x:Name="PedidosDataGrid" ItemsSource="{Binding}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Identificador" Binding="{Binding id}" IsReadOnly="True"></DataGridTextColumn>
+                            <DataGridTemplateColumn Header="Nombre completo" Width="*" IsReadOnly="True">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock>
+                                                <Run Text="{Binding nombre}" ></Run>
+                                                <Run Text="{Binding apellido}"></Run>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Nº de pedidos" Binding="{Binding PEDIDOS}" IsReadOnly="True"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    
+                </StackPanel>
+                
+                
+                
+            </TabItem>
         </TabControl>
 
     </Grid>
