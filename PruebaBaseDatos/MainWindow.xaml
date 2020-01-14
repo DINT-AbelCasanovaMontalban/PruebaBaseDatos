@@ -1,0 +1,68 @@
+﻿<Window x:Class="PruebaBaseDatos.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PruebaBaseDatos"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <Window.Resources>
+        <DataTemplate x:Key="PlantillaListBox">
+            <TextBlock>
+                <Run Text="{Binding id}"></Run>
+                <Run Text="-"></Run>
+                <Run Text="{Binding nombre}"></Run>
+                <Run Text="{Binding apellido}"></Run>
+            </TextBlock>
+        </DataTemplate>
+    </Window.Resources>
+    
+    <Grid>
+
+
+        <TabControl>
+            <TabItem Header="ListBox">
+                <ListBox x:Name="ClientesListBox" ItemsSource="{Binding}" ItemTemplate="{StaticResource PlantillaListBox}"></ListBox>
+            </TabItem>
+            <TabItem Header="Insertar">
+                <StackPanel x:Name="InsertarStackPanel" Margin="5">
+                    <TextBlock>Id</TextBlock>
+                    <TextBox x:Name="IdTextBox" Text="{Binding id}"></TextBox>
+                    <TextBlock>Nombre</TextBlock>
+                    <TextBox x:Name="NombreTextBox" Text="{Binding nombre}"></TextBox>
+                    <TextBlock>Apellido</TextBlock>
+                    <TextBox x:Name="ApellidoTextBox" Text="{Binding apellido}"></TextBox>
+                    <StackPanel Orientation="Horizontal" Margin="0,5,5,5">
+                        <Button x:Name="InsertarButton" Click="InsertarButton_Click">Insertar</Button>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Eliminar">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <ComboBox x:Name="IdComboBox" ItemsSource="{Binding}" DisplayMemberPath="id" Width="150"></ComboBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Button x:Name="EliminarButton" Click="EliminarButton_Click" Width="70">Eliminar</Button>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Modificar">
+                <StackPanel x:Name="ModificarStackPanel" DataContext="{Binding ElementName=IdModificarComboBox,Path=SelectedItem}" Margin="5">
+                    <ComboBox x:Name="IdModificarComboBox" ItemsSource="{Binding}" DisplayMemberPath="id" Margin="5"></ComboBox>
+                    <TextBlock>Id</TextBlock>
+                    <TextBox x:Name="IdModificarTextBox" Text="{Binding id}"></TextBox>
+                    <TextBlock>Nombre</TextBlock>
+                    <TextBox x:Name="NombreModificarTextBox" Text="{Binding nombre}"></TextBox>
+                    <TextBlock>Apellido</TextBlock>
+                    <TextBox x:Name="ApellidoModificarTextBox" Text="{Binding apellido}"></TextBox>
+                    <StackPanel Orientation="Horizontal" Margin="0,10,10,10">
+                        <Button x:Name="ModificarButton" Click="ModificarButton_Click">Modificar</Button>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>
